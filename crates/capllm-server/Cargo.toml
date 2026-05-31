@@ -1,0 +1,38 @@
+[package]
+name = "capllm-server"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Axum HTTP server exposing the /v1/chat/completions gateway endpoint"
+
+[dependencies]
+capllm-core = { workspace = true }
+capllm-translate = { workspace = true }
+capllm-proxy = { workspace = true }
+capllm-redis = { workspace = true }
+capllm-security = { workspace = true }
+axum = { workspace = true }
+tokio = { workspace = true }
+tokio-stream = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+anyhow = { workspace = true }
+futures = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+tower = { workspace = true }
+tower-http = { workspace = true }
+bytes = { workspace = true }
+reqwest = { workspace = true }
+opentelemetry = { workspace = true }
+opentelemetry_sdk = { workspace = true }
+opentelemetry-prometheus = { workspace = true }
+prometheus = { workspace = true }
+tracing-opentelemetry = { workspace = true }
+
+[dev-dependencies]
+axum = { workspace = true, features = ["macros"] }
+fred = { workspace = true }
+capllm-redis = { workspace = true }
+uuid = { workspace = true, features = ["v4"] }

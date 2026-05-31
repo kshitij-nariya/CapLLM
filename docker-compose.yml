@@ -1,0 +1,28 @@
+services:
+  gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - RUST_LOG=info,capllm_server=debug,capllm_redis=debug,capllm_security=debug
+      - REDIS_URL=redis://redis:6379
+      - ANTHROPIC_BASE_URL=https://api.anthropic.com/v1/messages
+      - GEMINI_BASE_URL=https://generativelanguage.googleapis.com/v1beta
+    depends_on:
+      - redis
+
+  redis:
+    image: valkey/valkey:latest
+    ports:
+      - "6379:6379"
+
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    depends_on:
+      - gateway

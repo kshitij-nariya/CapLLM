@@ -1,0 +1,81 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/capllm-core",
+    "crates/capllm-translate",
+    "crates/capllm-proxy",
+    "crates/capllm-redis",
+    "crates/capllm-security",
+    "crates/capllm-server",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.75"
+license = "MIT"
+
+[workspace.dependencies]
+# Async runtime
+tokio = { version = "1", features = ["full"] }
+tokio-stream = "0.1"
+
+# Web framework
+axum = { version = "0.7", features = ["macros"] }
+
+# HTTP client
+reqwest = { version = "0.12", default-features = false, features = [
+    "rustls-tls",
+    "json",
+    "stream",
+] }
+
+# Serialization
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# Error handling
+thiserror = "2"
+anyhow = "1"
+
+# Streaming & bytes
+futures = "0.3"
+bytes = "1"
+
+# Logging / tracing
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
+
+# Tower middleware
+tower = "0.5"
+tower-http = { version = "0.6", features = ["cors", "trace", "timeout", "request-id"] }
+
+# Unique IDs
+uuid = { version = "1", features = ["v4"] }
+
+# Redis
+fred = { version = "10", features = ["serde-json", "i-scripts"] }
+
+# Hashing
+sha2 = "0.10"
+hex = "0.4"
+
+# Security / DLP
+regex = "1"
+aes-gcm = "0.10"
+parking_lot = "0.12"
+rand = "0.8"
+
+# Observability / OTEL
+opentelemetry = { version = "0.22", features = ["metrics"] }
+opentelemetry_sdk = { version = "0.22", features = ["metrics"] }
+opentelemetry-prometheus = "0.15"
+prometheus = "0.13"
+tracing-opentelemetry = "0.23"
+
+# Internal crates
+capllm-core = { path = "crates/capllm-core" }
+capllm-translate = { path = "crates/capllm-translate" }
+capllm-proxy = { path = "crates/capllm-proxy" }
+capllm-redis = { path = "crates/capllm-redis" }
+capllm-security = { path = "crates/capllm-security" }
